@@ -16,8 +16,8 @@ func heure(w http.ResponseWriter, req *http.Request) {
 func add(w http.ResponseWriter, req *http.Request) {
 	req.ParseForm()
 	if err := req.ParseForm(); err != nil {
-		fmt.Println("Something went bad")
-		fmt.Fprintln(w, "Something went bad")
+		fmt.Println("Bad req")
+		fmt.Fprintln(w, "Bad req")
 		return
 	}
 	author := req.PostForm.Get("author")
@@ -49,7 +49,7 @@ func saveOnFile(author, entry string) {
 	fmt.Println("Enregistré dans le fichier save.txt")
 }
 
-func allEntries() []string {
+func readFile() []string {
 	raw, err := os.ReadFile("save.txt")
 
 	if err != nil {
@@ -62,12 +62,12 @@ func allEntries() []string {
 }
 
 func entries(w http.ResponseWriter, req *http.Request) {
-	entries := allEntries()
+	entries := readFile()
 
 	for _, entry := range entries {
-		entry := strings.Split(entry, ":")
+		entry := strings.Split(string(entry), ":")
 
-		fmt.Fprintf(w, entry[1]+"\n")
+		fmt.Fprintf(w, entry[0]+"\n")
 	}
 }
 
