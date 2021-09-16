@@ -24,7 +24,7 @@ func add(w http.ResponseWriter, req *http.Request) {
 	entry := req.PostForm.Get("entry")
 	fmt.Println(author, ": ", entry)
 	if len(author) > 0 && len(entry) > 0 {
-		saveOnFile(author, entry)
+		saveOnFile(entry)
 		fmt.Fprintf(w, author+": "+entry)
 	} else {
 		fmt.Fprintf(w, "Missing parameters")
@@ -32,7 +32,7 @@ func add(w http.ResponseWriter, req *http.Request) {
 
 }
 
-func saveOnFile(author, entry string) {
+func saveOnFile(entry string) {
 	f, err := os.OpenFile("save.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		log.Fatal(err)
