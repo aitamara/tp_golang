@@ -1,2 +1,2 @@
-mohand: texte de poete
-personne: message
+test texte
+test texte2

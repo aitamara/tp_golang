@@ -40,7 +40,8 @@ func saveOnFile(author, entry string) {
 
 	defer f.Close()
 
-	_, err2 := f.WriteString(author + ": " + entry + "\n")
+	//_, err2 := f.WriteString(author + ": " + entry + "\n")
+	_, err2 := f.WriteString(entry + "\n")
 
 	if err2 != nil {
 		log.Fatal(err2)
